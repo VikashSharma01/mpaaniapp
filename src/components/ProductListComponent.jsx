@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   Avatar, Button, Typography, Box, Switch, FormControlLabel,
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles(theme => ({
   list: {
@@ -10,8 +11,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   paper: {
-    width: 350,
-    padding: theme.spacing(1),
+    width: '100%',
+    padding: theme.spacing(2),
     color: theme.palette.text.secondary,
     border: '1px solid rgba(128,128,128, 0.1)',
     '&:hover': {
@@ -26,11 +27,11 @@ const useStyles = makeStyles(theme => ({
   },
 
   avatar_and_edit: {
-    width: '30%',
+    width: '100px',
   },
 
   product_details_list: {
-    width: '65%',
+    width: '300px',
   },
 
 
@@ -62,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 
 const ProductListComponent = (props) => {
   const classes = useStyles();
-  const { data } = props;
+  const { data, editProduct } = props;
 
   return (
     <>
@@ -75,8 +76,8 @@ const ProductListComponent = (props) => {
               src={data.libraryProduct ? data.libraryProduct.image : ''}
             />
 
-            <Button variant="outlined" onClick={() => props.editProduct(data.id)} color="primary" className={classes.button}>
-                            &#x270E; Edit
+            <Button variant="outlined" onClick={() => editProduct(data.id)} color="primary" className={classes.button}>
+              &#x270E; Edit
             </Button>
           </div>
 
@@ -130,6 +131,18 @@ const ProductListComponent = (props) => {
       </div>
     </>
   );
+};
+
+ProductListComponent.propTypes = {
+  data: PropTypes.shape({
+    libraryProduct: PropTypes.shape(),
+    mrp: PropTypes.number.isRequired,
+    modifiedOn: PropTypes.string.isRequired,
+    sellingPrice: PropTypes.number.isRequired,
+    displayName: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  }).isRequired,
+  editProduct: PropTypes.func.isRequired,
 };
 
 export default ProductListComponent;

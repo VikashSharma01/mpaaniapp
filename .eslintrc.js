@@ -9,12 +9,13 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
   },
   parserOptions: {
+    ecmaVersion: 6,
+    SourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
-    sourceType: 'module',
   },
+  parser: 'babel-eslint',
   plugins: [
     'react',
   ],
